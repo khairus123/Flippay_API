@@ -10,12 +10,16 @@ copy .env.example .env
 php artisan key:generate
 ```
 
-Atur koneksi database di `.env`. Project baru memakai SQLite; buat file `database/database.sqlite` jika belum ada, kemudian jalankan:
+Project ini menggunakan MySQL dari Laragon. Nyalakan MySQL di Laragon, lalu buat database bernama `flipplay_api` (misalnya lewat HeidiSQL atau phpMyAdmin). `.env.example` sudah memakai pengaturan standar Laragon (`root` tanpa password); sesuaikan `.env` jika konfigurasi MySQL-mu berbeda.
+
+Setelah database dibuat, jalankan migration dan server:
 
 ```bash
 php artisan migrate
 php artisan serve
 ```
+
+Data uji yang sebelumnya tersimpan di SQLite tidak otomatis dipindahkan. Tambahkan ulang data pengguna dan media melalui API/Postman setelah tersambung ke MySQL.
 
 Base URL lokal: `http://127.0.0.1:8000/api`. Request dengan body harus memakai header `Accept: application/json` dan `Content-Type: application/json`.
 
